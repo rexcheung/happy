@@ -36,7 +36,7 @@ def sleep(second):
 
 def send_key_by_name(name, key):
 	view = browser.find_element_by_name(name)
-	if view is not None:
+	if view:
 		sleep(0.3)
 		view.send_keys(key)
 
@@ -50,10 +50,12 @@ def login():
 def fill():
 	# 开始日期
 	sleep(0.3)
-	browser.find_element_by_xpath('//html//body//div[1]//table//tbody//tr[1]//td[1]//input').send_keys(START_DAY)
+	browser.find_element_by_xpath(
+		'//html//body//div[1]//table//tbody//tr[1]//td[1]//input').send_keys(START_DAY)
 	# 结束日期
 	sleep(0.3)
-	browser.find_element_by_xpath('//html//body//div[1]//table//tbody//tr[1]//td[2]//input').send_keys(END_DAY)
+	browser.find_element_by_xpath(
+		'//html//body//div[1]//table//tbody//tr[1]//td[2]//input').send_keys(END_DAY)
 	# 点击 Tag 考勤数据
 	sleep(0.3)
 	browser.find_element_by_xpath('//html//body//div[1]//table//tbody//tr[2]//td[3]//div').click()
@@ -62,7 +64,8 @@ def fill():
 def scrawl_datas():
 	datas = browser.find_elements_by_xpath('//*[@id="tbl"]//tbody//tr')
 	for i in range(1, len(datas)):
-		text = datas[i].find_element_by_xpath('//*[@id="tbl"]//tbody//tr[' + str(i) + ']//td[2]').text
+		text = datas[i].find_element_by_xpath(
+			'//*[@id="tbl"]//tbody//tr[' + str(i) + ']//td[2]').text
 		dates.append(text)
 
 
