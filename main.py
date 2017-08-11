@@ -26,6 +26,7 @@ def action(text):
 	if text == '1':
 		mount.mountall()
 		os.system('virtualbox --startvm XP &')
+		os.system('google-chrome &')
 	elif text == '2':
 		qd.manage.run()
 	elif text == '3':

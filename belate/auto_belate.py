@@ -5,8 +5,8 @@ from selenium.webdriver.chrome.options import Options
 import belate.ConstantIgnore
 
 ID = '17'
-START_DAY = '2017-07-01'
-END_DAY = '2017-07-31'
+START_DAY = '2017-08-01'
+END_DAY = '2017-08-31'
 
 browser = None
 
