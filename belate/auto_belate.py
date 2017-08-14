@@ -5,8 +5,8 @@ from selenium.webdriver.chrome.options import Options
 import belate.ConstantIgnore
 
 ID = '17'
-START_DAY = '2017-08-01'
-END_DAY = '2017-08-31'
+START_DAY = '2017-07-01'
+END_DAY = '2017-07-31'
 
 browser = None
 
@@ -72,12 +72,12 @@ def scrawl_datas():
 def check_page():
 	tag_a = browser.find_elements_by_xpath('//*[@id="id_pages_trans"]//a')
 	global total_page
-	total_page = len(tag_a) + 1
-	print('分页数量: ' + str(total_page))
+	total_page = tag_a[len(tag_a) - 1].text
+	print('分页数量: ' + total_page)
 
 
-def get_all_datas():
-	for i in range(1, total_page + 1):
+def get_all_datas(scrawl_data):
+	for i in range(1, int(total_page) + 1):
 		sleep(0.2)
 		browser.find_element_by_xpath('//*[@id="id_trans_pageNumInput"]').clear()
 		sleep(0.2)
@@ -85,7 +85,7 @@ def get_all_datas():
 		sleep(0.2)
 		browser.find_element_by_xpath('//*[@id="id_trans_pageNumInput"]').send_keys(Keys.ENTER)
 		sleep(0.2)
-		scrawl_datas()
+		scrawl_data()
 
 
 def check_be_late():
@@ -128,12 +128,10 @@ def main():
 	login()
 	fill()
 	check_page()
-	# scrawl_datas()
-	get_all_datas()
+	get_all_datas(scrawl_datas)
 	check_be_late()
 	for i in range(0, len(be_late_date)):
 		print(be_late_date[i])
 	print('迟到 ' + str(be_late_total_second) + '秒')
 
-
-main()
+# main()
